@@ -1,0 +1,161 @@
+<!DOCTYPE>
+<html ng-app="myApp">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+
+  <link href="../jsoneditoreditor/dist/jsoneditor.css" rel="stylesheet" type="text/css">
+  <script src="../jsoneditoreditor//dist/jsoneditor.js"></script>
+
+      <title>Smartsoft</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/ngProgress.css">
+<link rel="stylesheet" href="css/toaster.css">
+<style>
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+display: none !important;
+}
+    
+    .bg-1 { 
+    background-color: #01a5e2; /* Green */
+    color: #ffffff;
+}
+    
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+        margin-top:500;
+    }
+</style>
+    
+    
+  <style type="text/css">
+
+
+    code {
+      background-color: #f5f5f5;
+    }
+
+    #jsoneditor {
+      width: 500px;
+      height: 500px;
+    }
+  </style>
+</head>
+<body>
+ <div class="container-fluid bg-1 text-center">
+    <h3>Inferenciador de reglas</h3>
+  </div>
+    
+    <div class="container" ng-controller="ProductsCtrl">
+    <form name="Codenx" novalidate>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <!---Insertamos el editor -->
+            <th>
+            
+            <div id="jsoneditor"></div>
+            
+            
+            </th>
+          <th>Action</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input class="form-control" ng-model="product.name" required="" placeholder="Nombre de la Regla"></td>
+          <td><input class="form-control" ng-model="product.condicion" placeholder="Condicion"></td>
+          <td><button class="btn btn-primary" ng-click="add(product)" ng-if="!product._id" type="submit" ng-disabled="!Codenx.$valid">Agregar Regla</button>
+          </td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </form>
+
+  </div>
+<p>
+  Switch editor mode using the mode box.
+  Note that the mode can be changed programmatically as well using the method
+  <code>editor.setMode(mode)</code>, try it in the console of your browser.
+</p>
+
+
+
+<script>
+  var container = document.getElementById('jsoneditor');
+
+  var schema = {
+    "title": "Example Schema",
+    "type": "object",
+    "properties": {
+      "firstName": {
+        "type": "string"
+      },
+      "lastName": {
+        "type": "string"
+      },
+      "gender": {
+        "enum": ["male", "female"]
+      },
+      "age": {
+        "description": "Age in years",
+        "type": "integer",
+        "minimum": 0
+      },
+      "hobbies": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    },
+    "required": ["firstName", "lastName"]
+  };
+
+  var options = {
+    mode: 'tree',
+    modes: ['code', 'form', 'text', 'tree', 'view'], // allowed modes
+    onError: function (err) {
+      console.error(err);
+    },
+    schema: schema
+  };
+
+  var json = {
+    "firstName": "Jos",
+    "lastName": "de Jong",
+    gender: null,
+    "age": 34.2,
+    "hobbies": [
+        "programming",
+        "movies",
+        "bicycling"
+    ]
+  };
+
+  var editor = new JSONEditor(container, options, json);
+
+  console.log('json', json);
+  console.log('schema', schema);
+</script>
+    
+    
+    <footer class="container-fluid text-center">
+  <p>By Oscar Mario Arrieta Pineda.  Inferenciador de Reglas</p>
+</footer>
+
+    
+    <toaster-container toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
+
+<script src="js/angular.min.js"></script>
+<script src="js/angular-resource.min.js"></script>
+<script src="js/angular-animate.min.js"></script>
+<script src="js/ngProgress.min.js"></script>
+<script src="js/toaster.js"></script>
+<script src="app/app.js"></script>
+<script src="app/products.js"></script>
+</body>
+</html>

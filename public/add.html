@@ -1,0 +1,112 @@
+<!DOCTYPE>
+<html ng-app="myApp">
+<head>
+  <title>Smartsoft</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/ngProgress.css">
+<link rel="stylesheet" href="css/toaster.css">
+<style>
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+display: none !important;
+}
+    
+    
+    .bg-1 { 
+    background-color: #01a5e2; /* Green */
+    color: #ffffff;
+}
+    
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+        margin-top:500;
+    }
+</style>
+</head>
+    
+<body ng-cloak>
+ 
+<!-- Le agregamos un div con backcolor-->
+ <div class="container-fluid bg-1 text-center">
+    <h3>Inferenciador de reglas</h3>
+  </div>
+<div >
+    <p></p>
+</div>
+    
+     
+    
+    
+    <div class="container" ng-controller="ProductsCtrl">
+    
+    <form name="Codenx" novalidate>
+    <table class="table">
+  
+     
+        <thead>
+                  <tr>
+          <td><input class="form-control" ng-model="product.name" required="" placeholder="Nombre de la Regla"></td>
+          <td><input class="form-control" ng-model="product.condicion" placeholder="Condicion"></td>
+          <td>
+                 <button type="button" class="btn btn-success">Crear Regla</button>
+              <button class="btn btn-primary" ng-click="add(product)" ng-if="!product._id" type="submit" ng-disabled="!Codenx.$valid">Agregar Regla</button>
+            <div class="btn-group">
+              <button class="btn btn-info" ng-click="update(product)" ng-if="product._id" type="submit">Actualizar</button>
+              <button class="btn" ng-click="deselect()" ng-if="product._id">Clear</button>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <th>Nombre</th>
+          <th>Condicion</th>
+          <th>Action</th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+       <!---- 
+        <tr>
+          <td><input class="form-control" ng-model="product.name" required="" placeholder="Nombre de la Regla"></td>
+          <td><input class="form-control" ng-model="product.condicion" placeholder="Condicion"></td>
+          <td>
+                 <button type="button" class="btn btn-success">Crear Regla</button>
+              <button class="btn btn-primary" ng-click="add(product)" ng-if="!product._id" type="submit" ng-disabled="!Codenx.$valid">Agregar Regla</button>
+            <div class="btn-group">
+              <button class="btn btn-info" ng-click="update(product)" ng-if="product._id" type="submit">Actualizar</button>
+              <button class="btn" ng-click="deselect()" ng-if="product._id">Clear</button>
+            </div>
+          </td>
+        </tr>-->  
+        <tr ng-repeat="product in products">
+          <td>{{product.name}}</td>
+          <td>{{product.condicion}}</td>
+          <td>
+            <div class="btn-group">
+              <button class="btn btn-danger" ng-click="remove(product)">Eliminar</button>
+              <button class="btn btn-warning" ng-click="edit(product._id)">Editar</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+
+  </div>
+
+<div data-loading></div>
+<footer class="container-fluid text-center">
+  <p>By Oscar Mario Arrieta Pineda.  Inferenciador de Reglas</p>
+</footer>
+
+    
+    <toaster-container toaster-options="{'time-out': 3000, 'close-button':true, 'animation-class': 'toast-top-center'}"></toaster-container>
+
+<script src="js/angular.min.js"></script>
+<script src="js/angular-resource.min.js"></script>
+<script src="js/angular-animate.min.js"></script>
+<script src="js/ngProgress.min.js"></script>
+<script src="js/toaster.js"></script>
+<script src="app/app.js"></script>
+<script src="app/products.js"></script>
+</body>
+</html>
