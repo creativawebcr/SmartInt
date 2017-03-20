@@ -1,0 +1,2 @@
+# SmartInt
+Inferenciador de Reglas
